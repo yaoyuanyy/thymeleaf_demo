@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: thymeleaf_demo
+
+# Allow Thymeleaf templates to be reloaded at dev time
+  thymeleaf:
+    cache: false
+    mode: html
+
+
+logging:
+  level: trace
+
+server:
+  port: 8088
+
+
+
+
+
