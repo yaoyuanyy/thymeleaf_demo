@@ -22,9 +22,8 @@ NOTE:
 运行项目后，在浏览器中访问：http://localhost:8089/yy/index
 输入username:admin password:admin2登录
 输出：
-```
 
-```
+![结果](https://github.com/yaoyuanyy/thymeleaf_demo/blob/start1/thymeleaf_demo-start1.png?raw=true)
 
 
 
