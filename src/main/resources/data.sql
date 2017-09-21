@@ -1,1 +1,1 @@
-INSERT INTO `user` VALUES ('1', 'admin', 'admin2', '0', null, null);
+INSERT INTO `user` VALUES (null, 'admin', 'admin2', '0', null, null);

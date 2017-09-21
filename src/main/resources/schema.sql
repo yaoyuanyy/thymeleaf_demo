@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE if not exists user (
   id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户表',
   name varchar(50) NOT NULL DEFAULT '' COMMENT '姓名',
   password varchar(20) NOT NULL COMMENT '密码',
