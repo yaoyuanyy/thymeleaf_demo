@@ -9,18 +9,21 @@ NOTE:
 的入门例子(example)
 ```
 
-#### get_started分支 
+#### start1分支 
 
 ```
-这个分支提供最简单的thymeleaf与springboot整合的例子，你可以直接clone到本地运行，然后加上你自己的逻辑代码。
-所以这是一个入门的分支。本项目的其他分支也是由这个分支扩展
+这个分支集成了springboot, thymeleaf, mysql, H2, Bootstrap完成了功能：
+1. 登录
+2. 从数据库获取数据展示在页面的功能
+
+你可以直接clone到本地运行，然后加上你自己的逻辑代码
 ```
 
-运行项目后，在浏览器中访问：http://localhost:8088/yy/welcome
+运行项目后，在浏览器中访问：http://localhost:8089/yy/index
+输入username:admin password:admin2登录
 输出：
 ```
-yy:
-hello world
+
 ```
 
 

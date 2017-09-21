@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: thymeleaf_demo
+
+# Allow Thymeleaf templates to be reloaded at dev time
+  thymeleaf:
+    cache: false
+    mode: html
+
+  datasource:
+    url: jdbc:h2:~/test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: 123456
+    driver-class-name: org.h2.Driver
+
+### MyBatis ### 也可以设置mapper-locations:classpath*:mapper/*Mapper.xml mapper文件夹在resources文件夹下
+mybatis:
+  mapper-locations: classpath*:com/yy/sql/mapper/*Mapper.xml
+  type-aliases-package: com.yy.mapper
+
+### Logging ###
+# Log levels (TRACE, DEBUG, INFO, WARN, ERROR, FATAL, OFF)
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+    org.springframework: INFO
+    org.springframework.web: INFO
+    org.mybatis: INFO
+    org.apache.http.client: ERROR
+    org.springframework.transaction: info
+    org.springframework.aop: info
+# File output
+#logging.file=api.log
+
+
+
+
+
+
+
+

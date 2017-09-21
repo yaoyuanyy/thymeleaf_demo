@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- 纯thymeleaf所写，没有加任何的样式-->
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<html ng-app="menuApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>balance statictis</title>
+</head>
+<script th:inline="javascript">
+
+</script>
+<body>
+
+
+<div>
+    <form action="#" th:action="@{/statictisAccount/getStatictisAccountData}" method="get">
+        <table>
+            <tr>
+
+                <td>站点:</td>
+                <td>
+                    <select id="site" name="site">
+                        <option th:if="${sites != null}" th:each="item: ${sites}" th:selected="${item == currentSite}"
+                                th:value="${item}"
+                                th:text="${item}"/>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>账户:</td>
+                <td>
+                    <select id="account" name="account">
+                        <option th:if="${accounts != null}" th:each="item: ${accounts}"
+                                th:selected="${item == currentAccount}"
+                                th:value="${item}"
+                                th:text="${item}"/>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button align="center" type="submit">获取</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>
+
+person info:
+<div class="Strategy_list">
+    <table id="Strategy_list" cellpadding="5" cellspacing="0"
+           class="table table-striped table-bordered table-hover" border="1">
+        <thead>
+        <tr>
+            <th>币种</th>
+            <th>最新余额</th>
+            <th>一天前余额</th>
+            <th>一天变化量</th>
+            <th>变化率</th>
+            <th>一周前余额</th>
+            <th>一周变化量</th>
+            <th>变化率</th>
+            <th>一个月前</th>
+            <th>月变化量</th>
+            <th>变化率</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${statictisData != null}" th:each="element : ${statictisData}">
+            <td th:text="${element.key}">编号</td>
+            <div th:with="lastBalance=${element.value[0]}">
+                <div th:each="balance,itr : ${element.value}">
+                    <td th:text="${balance}"></td>
+                    <div th:if="${!itr.first}">
+                        <td th:text="${#numbers.formatDecimal(lastBalance - balance,0,4)}"></td>
+                        <td th:text="${lastBalance eq 0 ? '0%' : #numbers.formatDecimal(((lastBalance - balance)/balance)*100,0,2)+'%'}"></td>
+                    </div>
+                </div>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+</body>
+<footer>
+    <div th:fragment="footer">
+        © 2016 okcoin statictis
+    </div>
+</footer>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="menuApp" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>my blog statictis</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7/bootstrap.min.css}">
+    <script th:src="@{/bootstrap-3.3.7/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/bootstrap-3.3.7/bootstrap.min.js}"></script>
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        footer {
+            background-color: #f2f2f2;
+            position:absolute;
+            bottom:0;
+            width:100%;
+            height:50px;
+        }
+
+
+        .width {
+            max-width: 30%;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">skyler</a>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <div class="container">
+        <form class="form-horizontal" action="#" th:action="@{/statictisAccount/getStatictisAccountData}" method="post">
+            <div class="form-group">
+                <label class="control-label col-sm-2">站点:</label>
+                <div class="col-sm-10">
+                    <select id="site" name="site" class="form-control width">
+                        <option th:if="${sites != null}" th:each="item: ${sites}" th:selected="${item == currentSite}"
+                                th:value="${item}"
+                                th:text="${item}"/>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">账户:</label>
+                <div class="col-sm-10">
+                    <select id="account" name="account" class="form-control width">
+                        <option th:if="${accounts != null}" th:each="item: ${accounts}"
+                                th:selected="${item == currentAccount}"
+                                th:value="${item}"
+                                th:text="${item}"/>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <h3>币余额变量表</h3>
+    <!--<p>The .table-striped class adds zebra-stripes to a table:</p>-->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>币种</th>
+            <th>最新余额</th>
+            <th>一天前余额</th>
+            <th>一天变化量</th>
+            <th>变化率</th>
+            <th>一周前余额</th>
+            <th>一周变化量</th>
+            <th>变化率</th>
+            <th>一个月前</th>
+            <th>月变化量</th>
+            <th>变化率</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${statictisData != null}" th:each="element : ${statictisData}">
+            <td th:text="${element.key}"></td>
+            <div th:with="lastBalance=${element.value[0]}">
+                <div th:each="balance,itr : ${element.value}">
+                    <td th:text="${balance}"></td>
+                    <div th:if="${!itr.first}">
+                        <td th:text="${#numbers.formatDecimal(lastBalance - balance,0,4)}"></td>
+                        <td th:text="${lastBalance eq 0 ? '0%' : #numbers.formatDecimal(((lastBalance - balance)/balance)*100,0,2)+'%'}"></td>
+                    </div>
+                </div>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<footer class="container-fluid text-center">
+    <p>Copyright © 2017-2020 </p>
+</footer>
+</body>
+</html>
